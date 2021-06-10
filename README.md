@@ -1,0 +1,1 @@
+Linux用Firmware更新プログラム: linux_fw(更新プログラム自体はWindowsで実行される)
