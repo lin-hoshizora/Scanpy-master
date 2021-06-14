@@ -8,7 +8,7 @@ import websockets
 import cv2
 import scanpy
 from img_utils import to_rgb, crop
-
+import os
 import yaml
 
 # scanner
@@ -36,6 +36,11 @@ async def serve_scan(websocket, path):
       x50.warmup()
       img_full = to_rgb(x50.scan())
       sys.stdout.flush()
+
+      save_dir_=Path(req['save'])/'not_crop'
+      if not save_dir_.exists():
+        os.makedirs(save_dir_)
+
       path_full = str(Path(req['save'])/'not_crop'/(req['id'] + '_クロッピングなし.jpg'))
       ret_full = cv2.imwrite(path_full, img_full[..., ::-1])
       img_crop = crop(img_full)
