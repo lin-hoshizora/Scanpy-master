@@ -65,5 +65,8 @@ def crop(img):
   crop = cv2.warpAffine(crop, M, size)
   if rotated:
     w, h = h, w
+
+  if max(w,h) > 1800:
+    return cv2.rotate(img,cv2.ROTATE_90_COUNTERCLOCKWISE)
   aligned = cv2.getRectSubPix(crop, (int(w), int(h)), (size[0]/2, size[1]/2))
   return aligned
