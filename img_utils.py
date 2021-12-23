@@ -47,7 +47,7 @@ def crop(img):
   th, bi = cv2.threshold(img_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
   contours, hierarchy = cv2.findContours(bi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
   if len(contours) == 0:
-    return img
+    return cv2.rotate(img,cv2.ROTATE_90_COUNTERCLOCKWISE)
 
   rotated = False
   large = sorted(contours, key=cv2.contourArea, reverse=True)[0]
@@ -104,7 +104,7 @@ def crop(img):
 
   print(aligned.shape)
   if new_long > 1600 or (aligned.shape[0] > 1200 and aligned.shape[1] > 1200):
-    return img
+    return cv2.rotate(img,cv2.ROTATE_90_COUNTERCLOCKWISE)
 
   if aligned.shape[0] <800 or aligned.shape[1] < 1300:
     return img[0:900,600:]
